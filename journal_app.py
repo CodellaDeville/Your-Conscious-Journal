@@ -49,7 +49,187 @@ st.markdown("""
     justify-content: center;
     margin-bottom: 1rem;
 }
+/* Voice to text button styling */
+.mic-button {
+    background-color: #4a69bd;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 10px 0;
+    border: none;
+    transition: all 0.3s ease;
+}
+.mic-button:hover {
+    background-color: #0984e3;
+    transform: scale(1.05);
+}
+.mic-button.recording {
+    background-color: #e17055;
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.mic-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.mic-status {
+    margin-left: 10px;
+    font-style: italic;
+    color: #e0e0e0;
+}
 </style>
+""", unsafe_allow_html=True)
+
+# Add JavaScript for speech recognition
+st.markdown("""
+<script>
+    // This function will be called when the page is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set up the speech recognition functionality after a short delay to ensure DOM is ready
+        setTimeout(setupSpeechRecognition, 1000);
+    });
+    
+    // Also add a MutationObserver to handle Streamlit's dynamic loading
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length) {
+                setTimeout(setupSpeechRecognition, 500);
+            }
+        });
+    });
+    
+    // Start observing the document body for DOM changes
+    window.addEventListener('load', function() {
+        observer.observe(document.body, { childList: true, subtree: true });
+        // Initial setup attempt
+        setTimeout(setupSpeechRecognition, 500);
+    });
+    
+    // Listen for our custom event from the mic initializer
+    document.addEventListener('micButtonReady', function() {
+        console.log('Mic button ready event received');
+        setupSpeechRecognition();
+    });
+    
+    // Set an interval to periodically check for the mic button
+    setInterval(function() {
+        const micButton = document.getElementById('mic-button');
+        if (micButton && !micButton.hasAttribute('data-initialized')) {
+            console.log('Found mic button via interval');
+            micButton.setAttribute('data-initialized', 'true');
+            setupSpeechRecognition();
+        }
+    }, 1000);
+    
+    function setupSpeechRecognition() {
+        // Check if the browser supports speech recognition
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            console.error('Speech recognition not supported in this browser');
+            return;
+        }
+        
+        // Create speech recognition object
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        
+        // Set properties
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'en-US';
+        
+        // Find the microphone button and text area
+        const micButton = document.getElementById('mic-button');
+        if (!micButton) {
+            console.error('Microphone button not found');
+            return;
+        }
+        
+        let isRecording = false;
+        let textArea = null;
+        
+        // Function to find the text area element
+        function findTextArea() {
+            const textAreas = document.querySelectorAll('textarea');
+            // We want the journal entry text area
+            for (let i = 0; i < textAreas.length; i++) {
+                if (textAreas[i].placeholder && textAreas[i].placeholder.includes('journal entry')) {
+                    return textAreas[i];
+                }
+            }
+            // If we can't find it by placeholder, just use the first text area
+            return textAreas.length > 0 ? textAreas[0] : null;
+        }
+        
+        // Handle click on mic button
+        micButton.addEventListener('click', function() {
+            textArea = findTextArea();
+            if (!textArea) {
+                console.error('Text area not found');
+                return;
+            }
+            
+            if (!isRecording) {
+                // Start recording
+                recognition.start();
+                micButton.classList.add('recording');
+                document.getElementById('mic-status').textContent = 'Listening...';
+                isRecording = true;
+            } else {
+                // Stop recording
+                recognition.stop();
+                micButton.classList.remove('recording');
+                document.getElementById('mic-status').textContent = 'Click to start speaking';
+                isRecording = false;
+            }
+        });
+        
+        // Process speech recognition results
+        recognition.onresult = function(event) {
+            if (!textArea) return;
+            
+            let transcript = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                if (event.results[i].isFinal) {
+                    transcript += event.results[i][0].transcript + ' ';
+                }
+            }
+            
+            if (transcript) {
+                // Append to existing text
+                textArea.value += transcript;
+                // Trigger an input event to update Streamlit's state
+                const event = new Event('input', { bubbles: true });
+                textArea.dispatchEvent(event);
+            }
+        };
+        
+        // Handle errors
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error', event.error);
+            micButton.classList.remove('recording');
+            document.getElementById('mic-status').textContent = 'Error: ' + event.error;
+            isRecording = false;
+        };
+        
+        // Handle end of speech recognition
+        recognition.onend = function() {
+            if (isRecording) {
+                // If still recording, restart recognition (for continuous listening)
+                recognition.start();
+            }
+        };
+    }
+</script>
 """, unsafe_allow_html=True)
 
 # Initialize session state variables if they don't exist
