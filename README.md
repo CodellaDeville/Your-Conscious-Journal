@@ -1,52 +1,87 @@
-# Daily Journaling Coach
+# Journaling with LaSoanyah
 
-An interactive journaling web application with a virtual coach avatar that guides users through daily journaling exercises with time-based prompts (morning, afternoon, evening).
+A mindful journaling application with AI-powered insights, sentiment analysis, and voice-to-text capabilities.
 
 ## Features
 
-- **Time-Based Prompts**: Different journaling prompts based on the time of day
-  - Morning: Focus on intentions and goals for the day
-  - Afternoon: Reflect on energy levels and challenges
-  - Evening: Review the day and practice gratitude
-
-- **Mood & Issue Tracking**: Track your mood and tag entries with common themes
-
-- **Weekly Reports**: Generate and download weekly summary reports (available on Thursdays)
-
-- **Journal History**: View and review all your past journal entries
-
-- **Avatar Coach**: Guided by a friendly avatar coach throughout the journaling process
+- **Voice-to-Text Journaling**: Speak your thoughts naturally with built-in speech recognition
+- **AI-Powered Prompts**: Get personalized, time-based prompts to inspire your writing
+- **Sentiment Analysis**: Track your emotional journey with automatic sentiment analysis
+- **Theme Detection**: Automatically identify common themes in your entries
+- **Mood Tracking**: Track your emotional state with intuitive emoji-based mood selection
+- **Smart Analytics**:
+  - Mood distribution visualization
+  - Sentiment trend analysis
+  - Theme frequency insights
+  - Personalized progress reports
+- **Tag System**: Organize entries with customizable tags
+- **Dark/Light Themes**: Customize your journaling experience
 
 ## Installation
 
-1. Make sure you have Python installed (3.7 or higher recommended)
+1. Make sure you have Python installed (3.7 or higher)
 
-2. Install the required packages:
-   ```
-   pip install streamlit pandas pillow
-   ```
+1. Install the required packages:
 
-3. Run the application:
-   ```
-   streamlit run journal_app.py
-   ```
+```bash
+pip install -r requirements.txt
+```
+
+1. Run the application:
+
+```bash
+streamlit run journal_app.py
+```
 
 ## Usage
 
-1. Enter your name on the welcome screen
-2. Select the time of day (or use the auto-detected time)
-3. Follow the prompts to complete your journal entry
-4. Save your entry and view past entries or create new ones
-5. Generate weekly reports to track your mood patterns and reflections
+1. Choose your preferred theme (default/dark/light)
+2. Start journaling with AI-powered prompts
+3. Use the microphone button for voice-to-text or type your entries
+4. Select your mood and add relevant tags
+5. View your entries, analytics, and download insights reports
+
+## Features in Detail
+
+### AI-Powered Prompts
+
+- Time-based prompts that adapt to morning, afternoon, and evening
+- Personalized prompts based on your mood patterns and journal content
+- Reflection prompts for deeper introspection
+
+### Analytics & Insights
+
+- Mood distribution charts
+- Sentiment trend analysis
+- Theme detection and frequency analysis
+- Comprehensive insights reports with:
+  - Overall mood patterns
+  - Sentiment trends
+  - Common themes
+  - Journaling habits
+  - Progress indicators
+
+### Theme Detection
+
+The app automatically identifies common themes in your entries, including:
+
+- Relationships
+- Work
+- Health
+- Personal Growth
+- Emotions
 
 ## Data Storage
 
-All journal entries are stored locally in the `journal_data` directory as CSV files. Weekly reports are generated as text files in the same directory.
+All journal entries are stored locally in CSV format, ensuring your privacy and data ownership.
 
-## Deployment
+## Tech Stack
 
-This application can be deployed for free on Streamlit Community Cloud for web access.
+- **Frontend**: Streamlit
+- **NLP**: TextBlob for sentiment analysis and theme detection
+- **Data Analysis**: Pandas
+- **Visualization**: Streamlit Charts
 
 ## License
 
-This project is open source and available for personal use.
+This project is licensed under the MIT License. See the LICENSE file for details.

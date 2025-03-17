@@ -1,0 +1,370 @@
+/* Material Design inspired styles */
+:root {
+    --primary: #8ec5fc;
+    --primary-light: #e0c3fc;
+    --surface: rgba(255, 255, 255, 0.05);
+    --on-surface: rgba(255, 255, 255, 0.87);
+    --elevation-1: rgba(255, 255, 255, 0.05);
+    --elevation-2: rgba(255, 255, 255, 0.07);
+    --elevation-3: rgba(255, 255, 255, 0.09);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 12px;
+}
+
+/* Typography */
+.logo-text {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 3.5rem;
+    background: linear-gradient(45deg, var(--primary-light) 0%, var(--primary) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo styles */
+.logo-image {
+    width: 280px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    transition: var(--transition);
+    opacity: 0.9;
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+    opacity: 1;
+}
+
+.avatar-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    transition: var(--transition);
+    opacity: 0.9;
+}
+
+.avatar-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+    opacity: 1;
+}
+
+/* Card styles */
+.welcome-box, .journal-container, .settings-container, .report-container {
+    background: var(--elevation-1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin: 2rem 0;
+    border: 1px solid var(--elevation-2);
+    transition: var(--transition);
+}
+
+.welcome-box:hover, .report-container:hover {
+    transform: translateY(-4px);
+    background: var(--elevation-2);
+    border-color: var(--elevation-3);
+}
+
+/* Navigation */
+.nav-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nav-buttons .stButton > button {
+    width: 100%;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-transform: none !important;
+    font-size: 1rem !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+.nav-button {
+    margin: 1rem 0;
+}
+
+.nav-button button {
+    background: var(--elevation-1) !important;
+    border: 1px solid var(--elevation-2) !important;
+    border-radius: var(--radius);
+    color: var(--on-surface);
+    padding: 1rem;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.nav-button button:hover {
+    transform: translateY(-2px);
+    background: var(--elevation-2) !important;
+    border-color: var(--elevation-3) !important;
+}
+
+/* Back button */
+[data-testid="stButton"] > button[key="back_btn"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    background: var(--elevation-1) !important;
+    color: var(--on-surface) !important;
+    border: 1px solid var(--elevation-2) !important;
+    border-radius: var(--radius) !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+    transition: var(--transition) !important;
+    margin-bottom: 1rem !important;
+    width: auto !important;
+    min-width: 120px !important;
+}
+
+[data-testid="stButton"] > button[key="back_btn"]:hover {
+    background: var(--elevation-2) !important;
+    border-color: var(--elevation-3) !important;
+    transform: translateX(-4px);
+}
+
+/* Button styles */
+button[kind="primary"], .stButton > button {
+    background: var(--primary) !important;
+    color: #000000 !important;
+    border: none !important;
+    border-radius: var(--radius) !important;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.025em !important;
+    text-transform: uppercase !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+}
+
+button[kind="primary"]:hover, .stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+    opacity: 0.9;
+}
+
+button[kind="primary"]:active, .stButton > button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+}
+
+/* Report styles */
+.report-container {
+    background: var(--elevation-1);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin: 2rem 0;
+    border: 1px solid var(--elevation-2);
+}
+
+.report-container h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.report-container img {
+    max-width: 100%;
+    border-radius: var(--radius);
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Journal prompts */
+.prompt-box {
+    background: var(--elevation-1);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--primary);
+    border: 1px solid var(--elevation-2);
+    transition: var(--transition);
+}
+
+.prompt-box:hover {
+    transform: translateX(4px);
+    background: var(--elevation-2);
+    border-color: var(--elevation-3);
+}
+
+/* Mood selector */
+.mood-selector {
+    background: var(--elevation-1);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid var(--elevation-2);
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form elements */
+.stTextArea > div > div > textarea,
+.stSelectbox > div > div > div,
+.stMultiSelect > div > div > div {
+    background: var(--elevation-1) !important;
+    border: 1px solid var(--elevation-2) !important;
+    border-radius: var(--radius) !important;
+    color: var(--on-surface) !important;
+    transition: var(--transition) !important;
+}
+
+.stTextArea > div > div > textarea:focus,
+.stSelectbox > div > div > div:focus,
+.stMultiSelect > div > div > div:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 1px var(--primary) !important;
+    background: var(--elevation-2) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--elevation-2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--elevation-3);
+}
+
+/* Download buttons */
+[data-testid="stDownloadButton"] > button {
+    background: var(--primary) !important;
+    color: #000000 !important;
+    border: none !important;
+    border-radius: var(--radius) !important;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.025em !important;
+    text-transform: uppercase !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+    width: 100% !important;
+}
+
+[data-testid="stDownloadButton"] > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+    opacity: 0.9;
+}
+
+[data-testid="stDownloadButton"] > button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+}
+
+/* Back button */
+.back-button {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 1000;
+    background: var(--elevation-1);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    color: var(--on-surface);
+    border: 1px solid var(--elevation-2);
+    transition: var(--transition);
+}
+
+.back-button:hover {
+    background: var(--elevation-2);
+    transform: translateX(-2px);
+    border-color: var(--elevation-3);
+}
+
+/* Material Icons */
+.material-icons {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    opacity: 0.9;
+}
+
+/* Streamlit overrides */
+.stApp {
+    background: var(--background) !important;
+}
+
+.stTextArea > div > div > textarea,
+.stSelectbox > div > div > div,
+.stMultiSelect > div > div > div {
+    background: var(--elevation-1) !important;
+    border: 1px solid var(--elevation-2) !important;
+    border-radius: var(--radius) !important;
+    color: var(--on-surface) !important;
+    transition: var(--transition) !important;
+}
+
+.stTextArea > div > div > textarea:focus,
+.stSelectbox > div > div > div:focus,
+.stMultiSelect > div > div > div:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 1px var(--primary) !important;
+    background: var(--elevation-2) !important;
+}
+
+/* Theme variations */
+[data-theme="dark"] {
+    --surface: rgba(255, 255, 255, 0.05);
+    --on-surface: rgba(255, 255, 255, 0.87);
+}
+
+[data-theme="light"] {
+    --surface: rgba(0, 0, 0, 0.05);
+    --on-surface: rgba(0, 0, 0, 0.87);
+}
+
+/* Custom styling for LaSoanyah Journal */
+
+.stApp {
+    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+    color: #f0f0f0;
+}
+
+.logo-container {
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+}
+
+.logo-container img {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.logo-container img:hover {
+    transform: scale(1.05);
+}

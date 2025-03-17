@@ -1,4 +1,9 @@
-date,time,time_of_day,mood,entry,tags
+date,time,time_of_day,mood,entry,tags,sentiment,themes
 2025-03-16,17:33,morning,Anxious,"life sucks
-",Stress
-2025-03-16,17:37,evening,Happy,jjj,"Productivity, Anxiety"
+",Stress,,
+2025-03-16,17:37,evening,Happy,jjj,"Productivity, Anxiety",,
+2025-03-16,19:34,,🙂,"test
+
+
+",Relationships,,
+2025-03-16,20:54,,😐,hi,,0.0,
