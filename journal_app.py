@@ -10,6 +10,90 @@ import io
 import matplotlib.pyplot as plt
 from collections import Counter
 
+# Set page configuration
+st.set_page_config(page_title="Daily Journaling Coach", layout="wide", initial_sidebar_state="collapsed")
+
+# Custom CSS to style the app
+st.markdown("""
+<style>
+/* Gradient background inspired by the swirling design */
+.main {
+    background: linear-gradient(135deg, #1a2639, #2d3a59, #3b1e5f, #6b2c91, #9b4dca, #4a69bd, #0984e3, #e17055, #d63031);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    color: #ffffff;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.stButton button {
+    background-color: #e75a7c;
+    color: white;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    border: none;
+}
+.stTextInput, .stTextArea {
+    background-color: #2d3a59;
+    color: white;
+    border-radius: 5px;
+}
+.reflection-box {
+    background-color: rgba(45, 58, 89, 0.8);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(5px);
+}
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+/* Voice to text button styling */
+.mic-button {
+    background-color: #4a69bd;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 10px 0;
+    border: none;
+    transition: all 0.3s ease;
+}
+.mic-button:hover {
+    background-color: #0984e3;
+    transform: scale(1.05);
+}
+.mic-button.recording {
+    background-color: #e17055;
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.mic-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.mic-status {
+    margin-left: 10px;
+    font-style: italic;
+    color: #e0e0e0;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # Initialize session state
 if 'entries' not in st.session_state:
     st.session_state.entries = pd.DataFrame(columns=['date', 'content', 'mood', 'themes'])
